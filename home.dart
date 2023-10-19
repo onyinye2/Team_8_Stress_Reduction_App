@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:projectonehomescreen/settings.dart';
+import 'dailyAffirmation.dart';
+import 'dailyStress.dart';
 
 class home extends StatefulWidget {
   @override
@@ -8,7 +12,11 @@ class home extends StatefulWidget {
 
 class _homeState extends State<home> {
   String dailyafim = 'The Daily affirmation of the day is going';
-  int stresslevel = 0;
+  String stresslevel = '';
+  int number = Random().nextInt(51);
+  DailyAffirmation affirmation =
+      new DailyAffirmation(id: 4, affirmation: '', useful: null);
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 143, 167, 161),
@@ -62,7 +70,10 @@ class _homeState extends State<home> {
                           height: 45,
                           child: ElevatedButton(
                             onPressed: () {
-                              stresslevel = 1;
+                              stresslevel = 'Low';
+                              DateTime today = DateTime.now();
+                              StressLevel stress = new StressLevel(
+                                  level: stresslevel, date: today);
                             },
                             style: ElevatedButton.styleFrom(
                                 primary: Color.fromARGB(255, 177, 176, 172)),
@@ -73,7 +84,7 @@ class _homeState extends State<home> {
                           height: 45,
                           child: ElevatedButton(
                               onPressed: () {
-                                stresslevel = 2;
+                                stresslevel = 'Medium';
                               },
                               style: ElevatedButton.styleFrom(
                                   primary: Color.fromARGB(255, 177, 176, 172)),
@@ -83,7 +94,7 @@ class _homeState extends State<home> {
                           height: 45,
                           child: ElevatedButton(
                               onPressed: () {
-                                stresslevel = 3;
+                                stresslevel = 'High';
                               },
                               style: ElevatedButton.styleFrom(
                                   primary: Color.fromARGB(255, 177, 176, 172)),
