@@ -19,19 +19,27 @@ class User {
       required this.dailyStressLevel,
       required this.savedAffirmations});
 
-  void addStressLevel(String id, StressLevel sl) {
-    sampleUsers[id as int].dailyStressLevel.add(sl);
+  static void addStressLevel(String id, StressLevel newSL) {
+    sampleUsers[id as int].dailyStressLevel.add(newSL);
   }
 
-  void savedAffirmation(String id, DailyAffirmation da) {
+  static void updateStressLevel(
+      String id, StressLevel oldSL, StressLevel newSL) {
+    if (oldSL.date.day == newSL.date.day) {
+      var tempIndex = sampleUsers[id as int].dailyStressLevel.indexOf(oldSL);
+      sampleUsers[id as int].dailyStressLevel[tempIndex] = newSL;
+    }
+  }
+
+  static void saveAffirmation(String id, DailyAffirmation da) {
     sampleUsers[id as int].savedAffirmations.add(da);
   }
 
-  void updateEmail(String id, String e) {
+  static void updateEmail(String id, String e) {
     sampleUsers[id as int].email = e;
   }
 
-  String updatePassword(String id, String currentPass, String newPass) {
+  static String updatePassword(String id, String currentPass, String newPass) {
     if (sampleUsers[id as int].password == currentPass) {
       sampleUsers[id as int].password = newPass;
       return "Password Updated.";

@@ -16,34 +16,36 @@ List<Exercise> sampleExercises = [
       title: "Guided Imagery",
       id: "0001",
       task:
-          "Take a short vacation in your mind. Listen and follow the instructions from the video.",
+          "Guided imagery is a relaxation technique that involves using your imagination to create calming mental images. It can help reduce stress by transporting your mind to a peaceful and serene place, allowing you to focus on positive and calming thoughts.",
       externalLink: "https://www.youtube.com/watch?v=t1rRo6cgM_E"),
   Exercise(
       title: "Meditate",
       id: "0002",
-      task: "Relieve your stress with meditation",
+      task:
+          "Meditation is a practice that involves focused attention and mindfulness. It can help reduce stress by promoting relaxation, improving self-awareness, and calming the mind. Various meditation techniques, such as mindfulness and loving-kindness meditation, are used for stress relief.",
       externalLink: "https://www.youtube.com/watch?v=Ix73CLI0Mo0"),
   Exercise(
       title: "Progressive Muscle Relaxation",
       id: "0003",
-      task: "Progressive muscle relaxation involves relaxing all the muscles in your body, group by group. \nTo practice, you can start with a few deep breaths. \nThen, practice tightening and relaxing each muscle group, starting with your forehead and moving down to your toes." +
-          "\nWith practice, you'll learn to recognize tension and tightness in your muscles and you'll be able to relax more easily. Each time you practice, however, you should experience a feeling of relaxation sweeping through your body.",
+      task:
+          "Progressive muscle relaxation is a method that involves systematically tensing and relaxing different muscle groups in your body. This exercise helps release physical tension and promotes relaxation, making it an effective stress management tool.",
       externalLink: "https://www.youtube.com/watch?v=1nZEdqcGVzo"),
   Exercise(
       title: "Triangle Breathing",
       id: "0004",
       task:
-          "\n1. Breathe in for 3 seconds, Hold for 3 seconds, Breathe out for 3 seconds",
+          "Triangle breathing, also known as box breathing, is a simple and structured breathing exercise. It involves inhaling, holding the breath, exhaling, and holding the breath again, each for the same duration. This method can help regulate your breath and reduce stress.",
       externalLink: "https://www.youtube.com/watch?v=OhO2YNMObkw"),
   Exercise(
       title: "One Minute Meditation",
       id: "0005",
-      task: "Quickly reduce stress with this one minute mediation video",
+      task:
+          "One-minute meditation is a brief mindfulness exercise designed to quickly center your thoughts and reduce stress. In just a minute, you can focus on your breath, clear your mind, and regain a sense of calm.",
       externalLink: "https://www.youtube.com/watch?v=F7PxEy5IyV4"),
   Exercise(
       title: "Take a Walk",
       id: "0006",
       task:
-          "Get outside and take a walk! A change of scenery could be all you need. If you'd like, listen to the audio in the link.",
+          "Going for a walk, especially in a natural setting like a park or near water, can be a simple yet effective way to relieve stress. Physical activity, fresh air, and a change of scenery all contribute to relaxation and stress reduction.",
       externalLink: "https://youtu.be/0f5oFPmJ-T8?si=qhsFPTwMUPS9SBGQ")
 ];
