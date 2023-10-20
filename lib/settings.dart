@@ -1,11 +1,33 @@
 import 'package:flutter/material.dart';
 
-class settings extends StatelessWidget {
-  String username = '';
+import 'models/daily_stress.dart';
+import 'models/user.dart';
+
+class Settings extends StatelessWidget {
+  Settings({super.key, required currentUser});
+
+  late final User currentUser;
+
   String email = '';
   String stressaverage = '';
 
+  String calculateStressAvg(List<StressLevel> sl) {
+    int sum = 0;
+    int i = 0;
+
+    while (i < sl.length) {
+      sum += int.parse(sl[i].level);
+      i++;
+    }
+    return sum.toString();
+  }
+
   Widget build(BuildContext context) {
+    ;
+    String email = currentUser.email;
+    String stressAverage = calculateStressAvg(currentUser.dailyStressLevel);
+    var dob = '01-01-2000';
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 143, 167, 161),
       body: Column(
@@ -23,7 +45,7 @@ class settings extends StatelessWidget {
                     icon: Icon(Icons.arrow_back_ios)),
               ),
               Container(
-                child: Text(
+                child: const Text(
                   'Settings',
                   style: TextStyle(fontSize: 40),
                 ),
@@ -42,6 +64,9 @@ class settings extends StatelessWidget {
                   height: 150,
                   width: 350,
                   alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      color: Colors.blueGrey),
                   child: Row(
                     children: [
                       Padding(
@@ -49,14 +74,14 @@ class settings extends StatelessWidget {
                         child: Container(
                           height: 80,
                           width: 80,
-                          child: Icon(
-                            Icons.face,
-                            size: 80,
-                          ),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.amber,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(180)),
+                          ),
+                          child: const Icon(
+                            Icons.face,
+                            size: 80,
                           ),
                         ),
                       ),
@@ -68,7 +93,7 @@ class settings extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: Text(
-                                'Hello $username!',
+                                'Hello ${currentUser.firstname} ${currentUser.lastname}!',
                                 style: TextStyle(fontSize: 25),
                                 textAlign: TextAlign.center,
                               ),
@@ -76,15 +101,15 @@ class settings extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: Text(
-                                'DOB is $dob',
-                                style: TextStyle(fontSize: 25),
+                                'Email: $email',
+                                style: const TextStyle(fontSize: 25),
                                 textAlign: TextAlign.center,
                               ),
                             ),
                             Container(
                               alignment: Alignment.center,
                               child: Text(
-                                'Average Stress Level: $stressaverage',
+                                'Average Stress Level: ${stressAverage}',
                                 style: TextStyle(fontSize: 16),
                                 textAlign: TextAlign.center,
                               ),
@@ -94,9 +119,6 @@ class settings extends StatelessWidget {
                       )
                     ],
                   ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      color: Colors.blueGrey),
                 ),
               ),
             ],
@@ -110,8 +132,9 @@ class settings extends StatelessWidget {
                   child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 177, 176, 172)),
-                      child: Text('Sign Out'))),
+                          backgroundColor:
+                              const Color.fromARGB(255, 177, 176, 172)),
+                      child: const Text('Sign Out'))),
             ],
           )
         ],
