@@ -10,8 +10,9 @@ class HomeScreen extends StatefulWidget {
       {required this.userID,
       required this.currentUser}); //now I can use widget to access variables
 
-  final String userID;
-  final User currentUser; // = sampleUsers[int.parse(userID)];
+  final String? userID;
+  final User? currentUser;
+  // = sampleUsers[int.parse(userID)];
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -19,20 +20,21 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   StressLevel currentSL = StressLevel(level: '0', date: DateTime.now());
 
+  List<User> users = sampleUsers;
   void updateUserStress(String sl) {
     var tempOldSL = currentSL;
     currentSL = StressLevel(level: sl, date: DateTime.now());
     if (tempOldSL.level == '0') {
-      User.addStressLevel(widget.currentUser.id, currentSL);
+      User.addStressLevel(widget.currentUser!.id, currentSL);
       //sampleUsers[int.parse(widget.currentUser.id)].dailyStressLevel.add(currentSL);
     } else {
-      User.updateStressLevel(widget.currentUser.id, tempOldSL, currentSL);
+      User.updateStressLevel(widget.currentUser!.id, tempOldSL, currentSL);
       //sampleUsers[int.parse(widget.currentUser.id)].dailyStressLevel.add(currentSL);
     }
   }
 
-  User getUser() {
-    User user = widget.currentUser;
+  User? getUser() {
+    User? user = widget.currentUser;
     return user;
   }
 
@@ -59,10 +61,14 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     return Scaffold(
+      appBar: AppBar(
+        //leading: ,
+        //actions: [],
+      ),
       backgroundColor: const Color.fromARGB(255, 143, 167, 161),
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
         type: BottomNavigationBarType.fixed,
@@ -87,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
 class Home extends StatefulWidget {
   const Home({super.key, required this.currentUser});
 
-  final User currentUser;
+  final User? currentUser;
   @override
   State<Home> createState() => _HomeState();
 }
@@ -99,16 +105,16 @@ class _HomeState extends State<Home> {
     var tempOldSL = currentSL;
     currentSL = StressLevel(level: sl, date: DateTime.now());
     if (tempOldSL.level == '0') {
-      User.addStressLevel(widget.currentUser.id, currentSL);
+      User.addStressLevel(widget.currentUser!.id, currentSL);
       //sampleUsers[int.parse(widget.currentUser.id)].dailyStressLevel.add(currentSL);
     } else {
-      User.updateStressLevel(widget.currentUser.id, tempOldSL, currentSL);
+      User.updateStressLevel(widget.currentUser!.id, tempOldSL, currentSL);
       //sampleUsers[int.parse(widget.currentUser.id)].dailyStressLevel.add(currentSL);
     }
   }
 
-  User getUser() {
-    User user = widget.currentUser;
+  User? getUser() {
+    User? user = widget.currentUser;
     return user;
   }
 
@@ -134,7 +140,14 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.all(25.0),
                 child: IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/settings');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Settings(currentUser: widget.currentUser);
+                          },
+                        ),
+                      );
                     },
                     icon: const Icon(Icons.settings)),
               )
@@ -143,8 +156,6 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 300,
-              width: 300,
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   color: Color.fromARGB(255, 153, 158, 159)),
@@ -158,7 +169,7 @@ class _HomeState extends State<Home> {
                     style: TextStyle(fontSize: 20),
                   ),
                   const SizedBox(
-                    height: 60,
+                    height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -216,7 +227,7 @@ class _HomeState extends State<Home> {
               child: Text(
                 dailyafim,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 25),
+                style: const TextStyle(fontSize: 16),
               ),
             ),
           ),

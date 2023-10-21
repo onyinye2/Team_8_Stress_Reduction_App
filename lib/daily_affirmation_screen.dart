@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -5,12 +6,37 @@ import 'package:team_8_stress_reduction_app/models/daily_affirmation.dart';
 import 'affirmation_card.dart';
 import 'models/user.dart';
 
-class AffirmationScreen extends StatelessWidget {
-  // In the constructor, require a Recipe.
+class AffirmationScreen extends StatefulWidget {
   const AffirmationScreen({super.key, required this.currentUser});
 
-  // Declare a field that holds the Recipe.
-  final User currentUser;
+  final User? currentUser;
+  @override
+  State<AffirmationScreen> createState() => _AffirmationScreenState();
+}
+
+class _AffirmationScreenState extends State<AffirmationScreen> {
+  //final User? currentUser = widget.currentUser!;
+
+  int _pos = 0;
+  late Timer _timer;
+  DailyAffirmation? da;
+
+  @override
+  void initState() {
+    _timer = Timer.periodic(const Duration(days: 1), (timer) {
+      setState(() {
+        da = affirmationList[DateTime.now().day];
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    //_timer = null;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,28 +47,34 @@ class AffirmationScreen extends StatelessWidget {
     currentAffirmation =
         affirmationList[random.nextInt(affirmationList.length)];
 
-    return SingleChildScrollView(
-      child: Column(children: [
-        AffirmationCard(affirmation: currentAffirmation),
-        ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: 2,
-            itemBuilder: (context, index) {
-              return Card(
-                child: ListTile(
-                  leading: const Icon(Icons.fastfood_sharp),
-                  title: Text('${affirmationList[index].id}'),
-                  titleAlignment: ListTileTitleAlignment.center,
-                  onTap: () {
-                    User.saveAffirmation(currentUser.id, affirmationList[1]);
-                  },
-                ),
-              );
-            }),
-      ]),
+    da = affirmationList[DateTime.now().day];
+    currentAffirmation = da!;
+
+    return Column(
+        children: [
+          AffirmationCard(affirmation: currentAffirmation),
+          (widget.currentUser!.savedAffirmations.isEmpty)
+              ? const Text("No Saved Affirmations")
+              : Expanded(
+                  child: SizedBox(
+                    height: 200,
+                    child: ListView.builder(
+                        padding: const EdgeInsets.all(8),
+                        itemCount: 2,
+                        itemBuilder: (context, index) {
+                          return AffirmationCard(
+                              affirmation:
+                              widget.currentUser!.savedAffirmations[index]);
+                        }),
+                  ),
+                )
+        ]
     );
   }
 }
+
+  // Declare a field that holds the Recipe.
+
 /**
  * 
  * return Card(
@@ -56,5 +88,17 @@ class AffirmationScreen extends StatelessWidget {
                       },
                     ),
                   );
+
+                  Card(
+                  child: ListTile(
+                    leading: const Icon(Icons.fastfood_sharp),
+                    title: Text('${affirmationList[index].id}'),
+                    titleAlignment: ListTileTitleAlignment.center,
+                    onTap: () {
+                      User.saveAffirmation(
+                          widget.currentUser!.id, affirmationList[1]);
+                    },
+                  ),
+                );
  * 
  */
