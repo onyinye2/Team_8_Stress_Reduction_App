@@ -1,6 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:team_8_stress_reduction_app/models/daily_affirmation.dart';
-import 'main.dart';
+import 'affirmation_card.dart';
 import 'models/user.dart';
 
 class AffirmationScreen extends StatelessWidget {
@@ -13,19 +15,37 @@ class AffirmationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Use the Recipe to create the UI.
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text("Daily Affirmations"),
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            child: ListView.builder(
-                padding: const EdgeInsets.all(8),
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return Card(
+    DailyAffirmation? currentAffirmation;
+
+    final random = Random();
+    currentAffirmation =
+        affirmationList[random.nextInt(affirmationList.length)];
+
+    return SingleChildScrollView(
+      child: Column(children: [
+        AffirmationCard(affirmation: currentAffirmation),
+        ListView.builder(
+            padding: const EdgeInsets.all(8),
+            itemCount: 2,
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  leading: const Icon(Icons.fastfood_sharp),
+                  title: Text('${affirmationList[index].id}'),
+                  titleAlignment: ListTileTitleAlignment.center,
+                  onTap: () {
+                    User.saveAffirmation(currentUser.id, affirmationList[1]);
+                  },
+                ),
+              );
+            }),
+      ]),
+    );
+  }
+}
+/**
+ * 
+ * return Card(
                     child: ListTile(
                       leading: const Icon(Icons.fastfood_sharp),
                       title: Text('${affirmationList[index].id}'),
@@ -36,8 +56,5 @@ class AffirmationScreen extends StatelessWidget {
                       },
                     ),
                   );
-                }),
-          ),
-        ));
-  }
-}
+ * 
+ */

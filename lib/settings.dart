@@ -8,8 +8,8 @@ class Settings extends StatelessWidget {
 
   late final User currentUser;
 
-  String email = '';
-  String stressaverage = '';
+  //String email = '';
+  //String stressaverage = '';
 
   String calculateStressAvg(List<StressLevel> sl) {
     int sum = 0;
@@ -22,8 +22,8 @@ class Settings extends StatelessWidget {
     return sum.toString();
   }
 
+  @override
   Widget build(BuildContext context) {
-    ;
     String email = currentUser.email;
     String stressAverage = calculateStressAvg(currentUser.dailyStressLevel);
     var dob = '01-01-2000';

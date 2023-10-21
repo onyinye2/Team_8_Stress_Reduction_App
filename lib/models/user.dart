@@ -47,6 +47,19 @@ class User {
       return "incorrect password";
     }
   }
+
+  static String findUserID(String email, String password) {
+    var i = 0;
+    User tempUser;
+    while (i < sampleUsers.length) {
+      tempUser = sampleUsers[i];
+      if (tempUser.email == email && tempUser.password == password) {
+        return tempUser.id;
+      }
+      i++;
+    }
+    return '-0001';
+  }
 }
 
 List<User> sampleUsers = [

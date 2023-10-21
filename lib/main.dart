@@ -1,45 +1,42 @@
 import 'package:flutter/material.dart';
-//import 'package:projectonehomescreen/settings.dart';
-import 'home.dart';
-//import 'settings.dart';
-import '/models/user.dart';
+import 'Screens/Welcome/welcome_screen.dart';
+import 'constants.dart';
 
-//THIS SHOULD BE THE WELCOME SCREEN
-
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      //home: HomeScreen(userID: , currentUser: ),
-      routes: const {
-        //'/home': (context) => HomeScreen(userID: , currentUser: , ),
-        //  '/settings': (context) => settings()
-      },
-      title: 'Onyemaobi CW 2 - Recipe App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: WelcomeScreen(),
-    );
-  }
-}
-
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: const Text('Stress Reduction App'),
-        ),
-        //passing in the ListView.builder
-        body: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Icon(Icons.emoji_emotions_outlined)],
-        ));
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Authentification',
+      theme: ThemeData(
+          primaryColor: kPrimaryColor,
+          scaffoldBackgroundColor: Colors.white,
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              elevation: 0,
+              backgroundColor: kPrimaryColor,
+              shape: const StadiumBorder(),
+              maximumSize: const Size(double.infinity, 56),
+              minimumSize: const Size(double.infinity, 56),
+            ),
+          ),
+          inputDecorationTheme: const InputDecorationTheme(
+            filled: true,
+            fillColor: kPrimaryLightColor,
+            iconColor: kPrimaryColor,
+            prefixIconColor: kPrimaryColor,
+            contentPadding: EdgeInsets.symmetric(
+                horizontal: defaultPadding, vertical: defaultPadding),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(30)),
+              borderSide: BorderSide.none,
+            ),
+          )),
+      home: const WelcomeScreen(),
+    );
   }
 }
