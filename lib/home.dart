@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:team_8_stress_reduction_app/daily_affirmation_screen.dart';
 import 'package:team_8_stress_reduction_app/exercise_screen.dart';
 import 'package:team_8_stress_reduction_app/models/daily_stress.dart';
 import '/settings.dart';
 import '/models/user.dart';
+import 'models/daily_affirmation.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen(
@@ -33,11 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  User? getUser() {
-    User? user = widget.currentUser;
-    return user;
-  }
-
   //User currentUser = getUser();
 
   int _selectedIndex = 0;
@@ -51,24 +49,50 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String dailyafim = 'The Daily affirmation of the day is going';
+
   int stresslevel = 0;
 
   Widget build(BuildContext context) {
+    final random = Random();
+    DailyAffirmation da = affirmationList[DateTime.now().day];
+
     final List<Widget> _widgetOptions = [
-      Home(currentUser: widget.currentUser),
-      AffirmationScreen(currentUser: widget.currentUser),
-      ExerciseApp(),
+      Home(currentUser: widget.currentUser, dailyAffirmation: da),
+      AffirmationScreen(currentUser: widget.currentUser, dailyAffirmation: da),
+      ExerciseApp()
     ];
+
+    User cu = widget.currentUser!;
 
     return Scaffold(
       appBar: AppBar(
-        //leading: ,
-        //actions: [],
+        leading: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: IconButton(
+              onPressed: () {}, icon: const Icon(Icons.arrow_back_ios)),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Settings(currentUser: cu);
+                      },
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.settings)),
+          )
+        ],
       ),
       backgroundColor: const Color.fromARGB(255, 143, 167, 161),
       body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
         type: BottomNavigationBarType.fixed,
@@ -91,8 +115,10 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class Home extends StatefulWidget {
-  const Home({super.key, required this.currentUser});
+  const Home(
+      {super.key, required this.currentUser, required this.dailyAffirmation});
 
+  final DailyAffirmation? dailyAffirmation;
   final User? currentUser;
   @override
   State<Home> createState() => _HomeState();
@@ -128,31 +154,6 @@ class _HomeState extends State<Home> {
       backgroundColor: const Color.fromARGB(255, 143, 167, 161),
       body: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.arrow_back_ios)),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return Settings(currentUser: widget.currentUser);
-                          },
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.settings)),
-              )
-            ],
-          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -225,7 +226,7 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   color: Colors.blueGrey),
               child: Text(
-                dailyafim,
+                widget.dailyAffirmation!.affirmation,
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 16),
               ),

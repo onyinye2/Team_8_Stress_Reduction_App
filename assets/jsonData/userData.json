@@ -1,0 +1,52 @@
+{"sampleUsers" : [
+    
+        {
+            "id": "0000",
+            "firstname": "Onyi",
+            "lastname": "Onyemaobi",
+            "email": "onyemaobi1@gmail.com",
+            "password": "onyemaobi1",
+            "dailyStressLevel": [],
+            "savedAffirmations": []
+        },
+    
+        {
+            "id": "0001",
+            "firstname": "Pau",
+            "lastname": "Tuang",
+            "email": "tuang1@gmail.com",
+            "password": "tuang1",
+            "dailyStressLevel": [],
+            "savedAffirmations": []
+    },
+    
+        {
+            "id": "0002",
+        "firstname": "Gihwan",
+        "lastname": "Kim",
+        "email": "kim1@gmail.com",
+        "password": "kim1",
+        "dailyStressLevel": [],
+        "savedAffirmations": []
+    },
+  
+        {"id": "0003",
+        "firstname": "Ayman",
+        "lastname": "Tawaalai",
+        "email": "tawaalai1@gmail.com",
+        "password": "tawalaai1",
+        "dailyStressLevel": [],
+        "savedAffirmations": []}
+    ,
+  
+        {
+            "id": "0004",
+        "firstname": "Kawsar",
+        "lastname": "Ali",
+        "email": "ali1@gmail.com",
+        "password": "ali1",
+        "dailyStressLevel": [],
+        "savedAffirmations": []
+    }
+  ]
+  }

@@ -20,14 +20,15 @@ class User {
       required this.savedAffirmations});
 
   static void addStressLevel(String id, StressLevel newSL) {
-    sampleUsers[id as int].dailyStressLevel.add(newSL);
+    sampleUsers[int.parse(id)].dailyStressLevel.add(newSL);
   }
 
   static void updateStressLevel(
       String id, StressLevel oldSL, StressLevel newSL) {
     if (oldSL.date.day == newSL.date.day) {
-      var tempIndex = sampleUsers[id as int].dailyStressLevel.indexOf(oldSL);
-      sampleUsers[id as int].dailyStressLevel[tempIndex] = newSL;
+      var tempIndex =
+          sampleUsers[int.parse(id)].dailyStressLevel.indexOf(oldSL);
+      sampleUsers[int.parse(id)].dailyStressLevel[tempIndex] = newSL;
     }
   }
 

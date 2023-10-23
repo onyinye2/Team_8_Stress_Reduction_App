@@ -7,9 +7,11 @@ import 'affirmation_card.dart';
 import 'models/user.dart';
 
 class AffirmationScreen extends StatefulWidget {
-  const AffirmationScreen({super.key, required this.currentUser});
+  const AffirmationScreen(
+      {super.key, required this.currentUser, required this.dailyAffirmation});
 
   final User? currentUser;
+  final DailyAffirmation? dailyAffirmation;
   @override
   State<AffirmationScreen> createState() => _AffirmationScreenState();
 }
@@ -25,7 +27,7 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
   void initState() {
     _timer = Timer.periodic(const Duration(days: 1), (timer) {
       setState(() {
-        da = affirmationList[DateTime.now().day];
+        da = widget.dailyAffirmation;
       });
     });
     super.initState();
@@ -43,33 +45,26 @@ class _AffirmationScreenState extends State<AffirmationScreen> {
     // Use the Recipe to create the UI.
     DailyAffirmation? currentAffirmation;
 
-    final random = Random();
-    currentAffirmation =
-        affirmationList[random.nextInt(affirmationList.length)];
+    currentAffirmation = widget.dailyAffirmation!;
 
-    da = affirmationList[DateTime.now().day];
-    currentAffirmation = da!;
-
-    return Column(
-        children: [
-          AffirmationCard(affirmation: currentAffirmation),
-          (widget.currentUser!.savedAffirmations.isEmpty)
-              ? const Text("No Saved Affirmations")
-              : Expanded(
-                  child: SizedBox(
-                    height: 200,
-                    child: ListView.builder(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: 2,
-                        itemBuilder: (context, index) {
-                          return AffirmationCard(
-                              affirmation:
+    return Column(children: [
+      AffirmationCard(affirmation: currentAffirmation),
+      (widget.currentUser!.savedAffirmations.isEmpty)
+          ? const Text("No Saved Affirmations")
+          : Expanded(
+              child: SizedBox(
+                height: 200,
+                child: ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                    itemCount: 2,
+                    itemBuilder: (context, index) {
+                      return AffirmationCard(
+                          affirmation:
                               widget.currentUser!.savedAffirmations[index]);
-                        }),
-                  ),
-                )
-        ]
-    );
+                    }),
+              ),
+            )
+    ]);
   }
 }
 

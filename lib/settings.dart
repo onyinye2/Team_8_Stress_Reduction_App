@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:team_8_stress_reduction_app/Screens/Welcome/components/welcome_image.dart';
+import 'package:team_8_stress_reduction_app/Screens/Welcome/welcome_screen.dart';
 
+import 'Screens/Signup/signup_screen.dart';
 import 'models/daily_stress.dart';
 import 'models/user.dart';
 
-class Settings extends StatelessWidget {
-  Settings({super.key, required currentUser});
+class Settings extends StatefulWidget {
+  const Settings({super.key, required this.currentUser});
 
-  late final User currentUser;
+  final User? currentUser;
+  @override
+  State<Settings> createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
+  //SettingsState({super.key, required currentUser});
 
   //String email = '';
   //String stressaverage = '';
@@ -24,12 +33,13 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String email = currentUser.email;
-    String stressAverage = calculateStressAvg(currentUser.dailyStressLevel);
+    String email = widget.currentUser!.email;
+    String stressAverage =
+        calculateStressAvg(widget.currentUser!.dailyStressLevel);
     var dob = '01-01-2000';
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 143, 167, 161),
+      backgroundColor: const Color.fromARGB(255, 143, 167, 161),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -42,7 +52,7 @@ class Settings extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(Icons.arrow_back_ios)),
+                    icon: const Icon(Icons.arrow_back_ios)),
               ),
               Container(
                 child: const Text(
@@ -61,8 +71,7 @@ class Settings extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  height: 150,
-                  width: 350,
+                  height: 200,
                   alignment: Alignment.center,
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -93,8 +102,8 @@ class Settings extends StatelessWidget {
                             Container(
                               alignment: Alignment.center,
                               child: Text(
-                                'Hello ${currentUser.firstname} ${currentUser.lastname}!',
-                                style: TextStyle(fontSize: 25),
+                                'Hello ${widget.currentUser!.firstname} ${widget.currentUser!.lastname}!',
+                                style: TextStyle(fontSize: 20),
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -102,7 +111,7 @@ class Settings extends StatelessWidget {
                               alignment: Alignment.center,
                               child: Text(
                                 'Email: $email',
-                                style: const TextStyle(fontSize: 25),
+                                style: const TextStyle(fontSize: 16),
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -130,7 +139,16 @@ class Settings extends StatelessWidget {
                   height: 100,
                   width: 100,
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const WelcomeScreen();
+                            },
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                           backgroundColor:
                               const Color.fromARGB(255, 177, 176, 172)),

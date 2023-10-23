@@ -2,29 +2,29 @@ import 'package:flutter/material.dart';
 import '/models/exercise.dart';
 
 void main() {
-  runApp(ExerciseApp());
+  runApp(const ExerciseApp());
 }
 
 class ExerciseApp extends StatelessWidget {
+  const ExerciseApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Exercise App',
-      theme: ThemeData(
-        primaryColor: Colors.teal, // Change the primary color
-      ),
-      home: ExerciseList(),
+      theme: ThemeData.dark(),
+      color: Colors.blueGrey,
+      home: const ExerciseList(),
     );
   }
 }
 
 class ExerciseList extends StatelessWidget {
+  const ExerciseList({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Exercises'),
-      ),
       body: ListView.builder(
         itemCount: sampleExercises.length,
         itemBuilder: (context, index) {
@@ -39,24 +39,25 @@ class ExerciseList extends StatelessWidget {
 class ExerciseCard extends StatelessWidget {
   final Exercise exercise;
 
-  ExerciseCard({required this.exercise});
+  const ExerciseCard({super.key, required this.exercise});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(8.0),
       elevation: 4, // Add some elevation
       child: ListTile(
-        contentPadding: EdgeInsets.all(16.0),
+        tileColor: Colors.grey[400],
+        contentPadding: const EdgeInsets.all(16.0),
         title: Text(
           exercise.title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),
         ),
         subtitle: Text(exercise.task),
-        trailing: Icon(
+        trailing: const Icon(
           Icons.play_circle_filled, // Use a play icon
           color: Colors.teal, // Match the primary color
           size: 40.0,
