@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:team_8_stress_reduction_app/Screens/Welcome/components/welcome_image.dart';
 import 'package:team_8_stress_reduction_app/Screens/Welcome/welcome_screen.dart';
 
-import 'Screens/Signup/signup_screen.dart';
 import 'models/daily_stress.dart';
 import 'models/user.dart';
 
@@ -15,11 +13,6 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  //SettingsState({super.key, required currentUser});
-
-  //String email = '';
-  //String stressaverage = '';
-
   String calculateStressAvg(List<StressLevel> sl) {
     int sum = 0;
     int i = 0;

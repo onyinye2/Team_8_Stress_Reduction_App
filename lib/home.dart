@@ -15,7 +15,6 @@ class HomeScreen extends StatefulWidget {
 
   final String? userID;
   final User? currentUser;
-  // = sampleUsers[int.parse(userID)];
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -29,14 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
     currentSL = StressLevel(level: sl, date: DateTime.now());
     if (tempOldSL.level == '0') {
       User.addStressLevel(widget.currentUser!.id, currentSL);
-      //sampleUsers[int.parse(widget.currentUser.id)].dailyStressLevel.add(currentSL);
     } else {
       User.updateStressLevel(widget.currentUser!.id, tempOldSL, currentSL);
-      //sampleUsers[int.parse(widget.currentUser.id)].dailyStressLevel.add(currentSL);
     }
   }
-
-  //User currentUser = getUser();
 
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
@@ -132,19 +127,10 @@ class _HomeState extends State<Home> {
     currentSL = StressLevel(level: sl, date: DateTime.now());
     if (tempOldSL.level == '0') {
       User.addStressLevel(widget.currentUser!.id, currentSL);
-      //sampleUsers[int.parse(widget.currentUser.id)].dailyStressLevel.add(currentSL);
     } else {
       User.updateStressLevel(widget.currentUser!.id, tempOldSL, currentSL);
-      //sampleUsers[int.parse(widget.currentUser.id)].dailyStressLevel.add(currentSL);
     }
   }
-
-  User? getUser() {
-    User? user = widget.currentUser;
-    return user;
-  }
-
-  //User currentUser = getUser()
 
   String dailyafim = 'The Daily affirmation of the day is going';
   int stresslevel = 0;
