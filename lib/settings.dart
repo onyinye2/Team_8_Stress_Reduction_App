@@ -96,7 +96,7 @@ class _SettingsState extends State<Settings> {
                               alignment: Alignment.center,
                               child: Text(
                                 'Hello ${widget.currentUser!.firstname} ${widget.currentUser!.lastname}!',
-                                style: TextStyle(fontSize: 20),
+                                style: const TextStyle(fontSize: 20),
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -111,8 +111,8 @@ class _SettingsState extends State<Settings> {
                             Container(
                               alignment: Alignment.center,
                               child: Text(
-                                'Average Stress Level: ${stressAverage}',
-                                style: TextStyle(fontSize: 16),
+                                'Average Stress Level: $stressAverage',
+                                style: const TextStyle(fontSize: 16),
                                 textAlign: TextAlign.center,
                               ),
                             ),

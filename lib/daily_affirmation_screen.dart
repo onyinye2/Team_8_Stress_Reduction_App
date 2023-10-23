@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:team_8_stress_reduction_app/models/daily_affirmation.dart';
@@ -19,7 +18,7 @@ class AffirmationScreen extends StatefulWidget {
 class _AffirmationScreenState extends State<AffirmationScreen> {
   //final User? currentUser = widget.currentUser!;
 
-  int _pos = 0;
+  final int _pos = 0;
   late Timer _timer;
   DailyAffirmation? da;
 

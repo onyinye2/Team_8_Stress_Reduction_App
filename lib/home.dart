@@ -9,8 +9,8 @@ import '/models/user.dart';
 import 'models/daily_affirmation.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen(
-      {required this.userID,
+  const HomeScreen(
+      {super.key, required this.userID,
       required this.currentUser}); //now I can use widget to access variables
 
   final String? userID;
@@ -47,14 +47,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int stresslevel = 0;
 
+  @override
   Widget build(BuildContext context) {
     final random = Random();
     DailyAffirmation da = affirmationList[DateTime.now().day];
 
-    final List<Widget> _widgetOptions = [
+    final List<Widget> widgetOptions = [
       Home(currentUser: widget.currentUser, dailyAffirmation: da),
       AffirmationScreen(currentUser: widget.currentUser, dailyAffirmation: da),
-      ExerciseApp()
+      const ExerciseApp()
     ];
 
     User cu = widget.currentUser!;
@@ -86,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       backgroundColor: const Color.fromARGB(255, 143, 167, 161),
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,

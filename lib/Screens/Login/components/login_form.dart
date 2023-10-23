@@ -8,8 +8,8 @@ import '../../Signup/signup_screen.dart';
 
 // ignore: must_be_immutable
 class LoginForm extends StatelessWidget {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwController = TextEditingController();
 
   LoginForm({
     Key? key,
@@ -99,7 +99,7 @@ class LoginForm extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return SignUpScreen();
+                    return const SignUpScreen();
                   },
                 ),
               );
